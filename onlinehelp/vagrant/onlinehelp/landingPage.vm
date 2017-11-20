@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" class="no-js" lang="en">
+
+<head>
+    #parse("head.vm")
+</head>
+
+<body>
+<div class="module19Box" id="module19Box">
+    <div class="grid">
+        <div class="grid-row">
+            <div class="default-content-container">
+                <div class="hide-error-msg">
+                    #parse("serverError.vm")
+                </div>
+                #parse("heading.vm")
+                <!-- User Journey steps -->
+                <div class="journeyWrapper">
+                    <div class="stepCounter">
+                        <span class="stepIcon"><img src="_asset/img/1-selected.png"/></span>
+                        <span class="lineBG"></span>
+                        <span class="stepIcon"><img src="_asset/img/2-unselected.png"/></span>
+                        <span class="lineBG"></span>
+                        <span class="stepIcon"><img src="_asset/img/3-unselected.png"/></span>
+                    </div>
+                    <div class="stepCopy">
+                        <span class="stepDetail first active">Your details</span>
+                        <span class="stepDetail second">Your security details</span>
+                        <span class="stepDetail third">Additional information</span>
+                    </div>
+                </div>
+                <!-- End - User Journey steps -->
+
+                <div class="text">
+                    #if($journey == 'handsetunlockingform')
+                        <h3>Your details</h3>
+                        <p>Fill in your details in the spaces below. You'll have to fill in any
+                            field marked with a * to continue.</p>
+                    #elseif($journey == 'migrateinform')
+                        <h3>Your details</h3>
+                        <p>Fill in your details in the spaces below. You'll have to fill in any
+                            field marked with a * to continue.</p>
+                        <p>If you're on Pay As You Go, you'll skip the security details page and be
+                            taken to the additional information page automatically.</p>
+                    #end
+                </div>
+
+                <form method="POST" name="onlineForm" class="onlineForm"
+                      id="onlineForm" action="$journey">
+                    <div class="formFieldRow">
+                        <label class="margin-bottom-10">What kind of tariff are you on?*</label>
+                        <div class="customSelect default-content-container">
+                        <span class="select">
+                           <select name="accountType" id="accountType" class="accountType"
+                                   required>
+                              <option value="">Select tariff</option>
+                              <option value="paym" #if( $userDetails.accountType == "paym")
+                                      selected #end>Pay Monthly</option>
+                              <option value="payg" #if( $userDetails.accountType == "payg")
+                                      selected #end>Pay As You Go</option>
+                              <option value="biz" #if( $userDetails.accountType == "biz")
+                                      selected #end>Business</option>
+                           </select>
+                        </span>
+                            <span class="errorMsg">Fill in to continue.</span>
+                        </div>
+                    </div>
+                    <div class="formFieldRow">
+                        <label class="margin-bottom-10">What kind of phone do you have?*</label>
+                        <div class="customSelect default-content-container">
+                        <span class="select">
+                            #set($phoneType = $userDetails.phoneType)
+                            <select name="phoneType" id="phoneType" class="phoneType" required>
+                              <option value="">Select phone</option>
+                              <option value="Apple iPhone" #if( $htmlDecoder.decodeHTML($phoneType) ==
+                                  "Apple iPhone")
+                                      selected #end>Apple iPhone</option>
+                              <option value="Palm Pre" #if( $htmlDecoder.decodeHTML($phoneType) == "Palm Pre")
+                                      selected #end>Palm Pre</option>
+                              <option value="Blackberry" #if( $htmlDecoder.decodeHTML($phoneType) ==
+                                  "Blackberry")
+                                      selected #end>Blackberry</option>
+                              <option value="LG" #if( $htmlDecoder.decodeHTML($phoneType) == "LG")
+                                      selected #end>LG</option>
+                              <option value="O2" #if( $htmlDecoder.decodeHTML($phoneType) == "O2")
+                                      selected #end>O2</option>
+                              <option value="Nokia" #if( $htmlDecoder.decodeHTML($phoneType) == "Nokia")
+                                      selected #end>Nokia</option>
+                              <option value="Motorola" #if( $htmlDecoder.decodeHTML($phoneType) == "Motorola")
+                                      selected #end>Motorola</option>
+                              <option value="Samsung" #if( $htmlDecoder.decodeHTML($phoneType) == "Samsung")
+                                      selected #end>Samsung</option>
+                              <option value="Sony Ericsson" #if( $htmlDecoder.decodeHTML($phoneType) ==
+                                  "Sony Ericsson")
+                                      selected #end>Sony Ericsson</option>
+                              <option value="Other" #if( $htmlDecoder.decodeHTML($phoneType) == "Other")
+                                      selected #end>Other</option>
+                           </select>
+                        </span>
+                            <span class="errorMsg">Fill in to continue.</span>
+                        </div>
+                    </div>
+                    <div class="formFieldRow">
+                        <label class="margin-bottom-10">Your mobile number*</label>
+                        <input type="tel" name="mpn" id="mpn" class="mpn" maxlength="15"
+                               value="$userDetails.mpn" required/>
+                        <span class="errorMsg telErrorMessage">Fill in to continue.</span>
+                    </div>
+                    <div class="formFieldRow">
+                        <label class="margin-bottom-10">Alternative contact number</label>
+                        <input type="tel" name="alternateMPN" id="alternateMPN" class="alternateMPN"
+                               maxlength="15" value="$userDetails.alternateMPN"/>
+                        <span class="errorMsg confirmTelErrorMessage"></span>
+                    </div>
+                    <div class="formFieldRow">
+                        <label class="margin-bottom-10">Your first name*</label>
+                        <input type="text" name="firstName" id="firstName" class="firstName"
+                               maxlength="20" value="$userDetails.firstName" required/>
+                        <span class="errorMsg firstNameErrorMessage">Fill in to continue.</span>
+                    </div>
+                    <div class="formFieldRow">
+                        <label class="margin-bottom-10">Your last name*</label>
+                        <input type="text" name="lastName" id="lastName" class="lastName"
+                               maxlength="20" value="$userDetails.lastName" required/>
+                        <span class="errorMsg lastNameErrorMessage">Fill in to continue.</span>
+                    </div>
+                    <div class="formFieldRow">
+                        <label class="margin-bottom-10">Your email address*</label>
+                        <input type="text" name="emailAddress" id="emailAddress"
+                               class="emailAddress" value="$userDetails.emailAddress"
+                               required/>
+                        <span class="errorMsg emailErrorMessage">Fill in to continue.</span>
+                    </div>
+                    <div class="formFieldRow">
+                        <label class="margin-bottom-10">Confirm your email address*</label>
+                        <input type="text" name="confirmEmailAddress" id="confirmEmailAddress"
+                               class="confirmEmailAddress"
+                               value="$userDetails.confirmEmailAddress" required onpaste="return false"/>
+                        <span class="errorMsg confirmEmailErrorMessage">Fill in to continue.</span>
+                    </div>
+                    <input id="pageInfo" type="hidden" name="pageInfo" value="landing"/>
+                    <input type="hidden" name="journey" id="journey" value="$journey"/>
+					<input type="hidden" name="csrfToken" id="csrfToken" value="$csrfToken"/>	   
+                    <div class="formFieldRow">
+                        <input class="online-form-next margin-bottom-10" type="submit"
+                               id="step-1-next" alt="Next" value="Next" title="Next"/>
+                    </div>
+                    <div class="formFieldRow">
+                        <div class="ctaConfigurableIcon cancelButton">
+                            <span class="cancelIcon"><a
+                                    href="cancel">Cancel</a></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

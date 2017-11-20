@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" class="no-js" lang="en">
+
+<head>
+    #parse("head.vm")
+</head>
+
+<body>
+
+<script>
+    window.onload = function () {
+        window.top.location.href = "$referer";
+    };
+</script>
+</body>

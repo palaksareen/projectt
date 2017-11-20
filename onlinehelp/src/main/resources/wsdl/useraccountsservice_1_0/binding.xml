@@ -1,0 +1,5 @@
+<jaxws:bindings wsdlLocation="useraccountsservice_1_0.wsdl"
+                xmlns:jaxws="http://java.sun.com/xml/ns/jaxws">
+    <!-- Turn off wrapper style Java method signature generation -->
+    <jaxws:enableWrapperStyle>false</jaxws:enableWrapperStyle>
+</jaxws:bindings>

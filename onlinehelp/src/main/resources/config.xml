@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:metrics="http://www.yammer.com/schema/metrics"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+      http://www.yammer.com/schema/metrics
+      http://www.yammer.com/schema/metrics/metrics.xsd">
+
+    <metrics:metrics-registry id="metrics" />
+    <metrics:annotation-driven metrics-registry="metrics" />
+
+    <bean id="extPropertiesPath" name="external-path" class="java.lang.String">
+        <constructor-arg
+                value="file:///${CATALINA_HOME}/appdata/onlinehelp/onlinehelp.properties"/>
+    </bean>
+
+    <bean id="onlineHelpLogger" class="uk.co.o2.onlinehelp.logger.OnlineHelpLogger">
+        <property name="accessLogger" ref="accessLogger"/>
+        <property name="errorLogger" ref="errorLogger"/>
+        <property name="opsLogger" ref="opsLogger"/>
+    </bean>
+
+    <bean id="prop" class="uk.co.o2.onlinehelp.util.DynamicProperties">
+        <property name="location" ref="extPropertiesPath"/>    <!-- Provided by spring to set the
+         external location -->
+        <property name="extLocation" ref="extPropertiesPath"/>
+        <property name="logger" ref="onlineHelpLogger"/> <!-- Used by custom class -->
+    </bean>
+
+    <bean id="velocityConfig"
+          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="#{ prop.getProperty('resource.loader.path') }"/>
+    </bean>
+
+</beans>

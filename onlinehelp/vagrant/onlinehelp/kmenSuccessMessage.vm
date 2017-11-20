@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" class="no-js" lang="en">
+
+<head> 
+	#parse("head.vm") 
+</head>
+ 
+ <body>
+	<div class="module19Box" id="module19Box">
+        <div class="grid">
+            <div class="grid-row">
+				<div class="default-content-container">
+                    <h2>Form submitted</h2>
+                    <div class="text">
+						<p>You've submitted your request to move your number to O2. If you submitted the request before 5.30pm, your number will be moved on the next working day. If not, it'll be moved in two working days.</p>
+						<p>Before your number moves, remember to back up any contacts that are stored on your sim.</p>
+						<p>On the morning of the day that your number will get transferred, you'll lose service on your new O2 sim and the number that you're moving to O2.</p>
+						<p>Once you've lost service, make sure you have your O2 sim in your device and keep switching it off and on until you get an O2 signal on the screen. This will happen before 6pm, and it means you're now ready to make and receive calls. 
+						   Other services, like texting and data, might take a bit longer but will be available within 24 hours.</p>
+						<p>If you're on Pay As You Go and have topped up your O2 sim before the day of the transfer, you'll need to activate your number. You can do this by making a chargeable call when the transfer is complete. Any credit or allowances you had before the transfer will all be there. You'll only be able to receive calls after you've activated your number.</p>
+                    </div>
+				</div>
+            </div>
+        </div>
+	</div>
+
+</body>
+</html>

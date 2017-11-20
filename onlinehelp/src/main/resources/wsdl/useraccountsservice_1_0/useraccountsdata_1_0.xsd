@@ -1,0 +1,1103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Date			Change		Author			Change Description
+	21/11/2012		1.1.7		Venkat			Added returnOrphanedAccount flag in searchOptions for searchOnlineAccounts_1 operation as part of EJB Migrations project.
+	03/05/2012		1.1.6		Venkat			Removed the string length for phoneNumberType to resolve a data validation issue.
+	19/08/2011		1.1.5		Manoj N V		Removed the string length restriction on attributes to resolve the Axis 1.4 client stub generation issue
+	12/08/2011		1.1.4		Raghu			Removed the superfluous trailing space character from the element resultSpecificData.  
+	15/07/2011		1.1.3		Raghu			Minor changes to multiplicity of some elements, based on new clarifications.
+	05/07/2011		1.1.2		Raghu			The element customerTier inside legacyAandRCustomerDataType renamed to segmentation (and made only a plain string type), based on new clarifications.
+	14/06/2011		1.1.1		Rajesh			The elements billingAccountId, billingAccountName, billingAccountType under billingDataType complex type referred to pscommonregistrationdata schema and also the element domain removed from searchCriteriaType.
+	13/06/2011		1.1.0		Raghu			Updated based on internal review comments.
+	09/06/2011		1.0.9		Raghu			Updated legacyAandRCustomerDataType & broadbandDataType based on confirmations from the Orange AandR team. 
+	26/05/2011		1.0.8		Raghu 			Removed security related types & elements as agreed with Project
+	05/05/2011  	1.0.7  		Raghu  			Added types pertaining to searchOnlineAccounts_1 operation
+	24/11/2010		1.0.6		Subramanyam		Restriction for the element "postCode" removed and type changed to xsd:string
+												in createOrUpdateUser operation. Removed the simple type postcodeType from this interface.	
+	22/11/2010		1.0.5		Subramanyam		The "customerType" & "companyCustomerType" elements's reference is changed from 
+												"reg.customerCategoryType" to "xsd:string"												
+	28/10/2010		1.0.4		Raghu			Changed domain in createOrUpdateUser operation to plain string type
+	05/10/2010		1.0.3		Raghu			Changed customeType in createOrUpdateUser operation to reg:customerCategoryType
+	27/09/2010     	1.0.2	    Raghu    		Updated createOrUpdateUser operation
+	20/09/2010     	1.0.1	    Raghu    		Added createOrUpdateUser and getUserNameSuggestions operations
+	17/07/2009     	1.0.0	    Arjun    		Initial Version
+--><xsd:schema targetNamespace="http://soa.o2.co.uk/useraccountsdata_1" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:uad="http://soa.o2.co.uk/useraccountsdata_1" xmlns:xcore="http://soa.o2.co.uk/coredata_1" xmlns:reg="http://soa.o2.co.uk/pscommonregistrationdata_1" xmlns:reg2="http://soa.o2.co.uk/pscommonregistrationdata_2">
+	<xsd:import namespace="http://soa.o2.co.uk/coredata_1" schemaLocation="coredata_1_1.xsd"/>
+	<xsd:import namespace="http://soa.o2.co.uk/pscommonregistrationdata_1" schemaLocation="pscommonregistrationdata_1_0.xsd"/>
+	<xsd:import namespace="http://soa.o2.co.uk/pscommonregistrationdata_2" schemaLocation="pscommonregistrationdata_2_0.xsd"/>
+	<xsd:element name="createOrUpdateUserFault" type="xcore:SOAFaultType">
+		<xsd:annotation>
+			<xsd:documentation>createOrUpdateUser Fault</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="getUserDetailsFault" type="xcore:SOAFaultType">
+		<xsd:annotation>
+			<xsd:documentation>getUserDetails Fault</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="searchFault" type="xcore:SOAFaultType">
+		<xsd:annotation>
+			<xsd:documentation>search Fault</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:element name="getUserNameSuggestionFault" type="xcore:SOAFaultType">
+		<xsd:annotation>
+			<xsd:documentation>getUserNameSuggestion Fault</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:element name="createOrUpdateUser" type="uad:createOrUpdateUser">
+		<xsd:annotation>
+			<xsd:documentation>Request for createOrUpdateUser operation</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="createOrUpdateUserResponse" type="uad:createOrUpdateUserResponse">
+		<xsd:annotation>
+			<xsd:documentation>Response for createOrUpdateUser operation</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="getUserDetails" type="uad:getUserDetails">
+		<xsd:annotation>
+			<xsd:documentation>Request for getUSerDetails operation</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="getUserDetailsResponse" type="uad:getUserDetailsResponse">
+		<xsd:annotation>
+			<xsd:documentation>Response for getUserDetails operation</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="search" type="uad:search">
+		<xsd:annotation>
+			<xsd:documentation>Request for search operation</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="searchResponse" type="uad:searchResponse">
+		<xsd:annotation>
+			<xsd:documentation>Response for search operation</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:element name="getUserNameSuggestion" type="uad:getUserNameSuggestion">
+		<xsd:annotation>
+			<xsd:documentation>Request for getUserNameSuggestion operation</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="getUserNameSuggestionResponse" type="uad:getUserNameSuggestionResponse">
+		<xsd:annotation>
+			<xsd:documentation>Response for getUserNameSuggestion operation</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	
+	<xsd:element name="searchOnlineAccounts_1" type="uad:searchOnlineAccounts_1">
+		<xsd:annotation>
+			<xsd:documentation>Request for searchOnlineAccounts_1 operation
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>	
+	<xsd:element name="searchOnlineAccounts_1Response" type="uad:searchOnlineAccounts_1Response">
+		<xsd:annotation>
+			<xsd:documentation>Response for searchOnlineAccounts_1 operation
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>	
+	<xsd:element name="searchOnlineAccounts_1Fault" type="xcore:SOAFaultType">
+		<xsd:annotation>
+			<xsd:documentation>searchOnlineAccounts_1 Fault</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="createOrUpdateUser">
+		<xsd:annotation>
+			<xsd:documentation>Request for createOrUpdateUser operation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="userDetails" type="uad:userDetailsType">
+				<xsd:annotation>
+					<xsd:documentation>User Details</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="createOrUpdateUserResponse">
+		<xsd:annotation>
+			<xsd:documentation>Response for createOrUpdateUser operation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="serviceResult" type="xcore:ServiceResultType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getUserDetails">
+		<xsd:annotation>
+			<xsd:documentation>Request for getUSerDetails operation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="customerNumber" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="userName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="domain" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getUserDetailsResponse">
+		<xsd:annotation>
+			<xsd:documentation>Response for getUSerDetails operation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="userDetails" type="reg:UserDetailsType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="search">
+		<xsd:annotation>
+			<xsd:documentation>Request for search operation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="forename" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="surname" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="email" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="postcode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="userName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="domain" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="key" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="MSISDN" type="xcore:msisdnType" minOccurs="0"/>
+			<xsd:element name="companyName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="start" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="count" type="xsd:int" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="searchResponse">
+		<xsd:annotation>
+			<xsd:documentation>Response for search operation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="userDetails" type="reg:UserDetailsType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getUserNameSuggestion">
+		<xsd:annotation>
+			<xsd:documentation>Request for getUserNameSuggestion operation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="firstName" type="xsd:string"/>
+			<xsd:element name="lastName" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="getUserNameSuggestionResponse">
+		<xsd:annotation>
+			<xsd:documentation>Response for getUserNameSuggestion operation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="userNameSuggestion" type="xsd:string" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="userDataType">
+		<xsd:annotation>
+			<xsd:documentation>Orange account user details, for database updates</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="address" type="uad:addressType" minOccurs="0"/>
+			<xsd:element name="roleSet" type="uad:roleSetType" minOccurs="0"/>
+			<xsd:element name="accountManagerEmail" type="uad:emailAddressType" minOccurs="0"/>
+			<xsd:element name="accountManagerName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="alternativeContactNumber" type="uad:phoneNumberType" minOccurs="0"/>
+			<xsd:element name="alternativeEmail" type="uad:emailAddressType" minOccurs="0"/>
+			<xsd:element name="companyName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="companyRegistrationNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="companyTelephoneNumber" type="uad:phoneNumberType" minOccurs="0"/>
+			<xsd:element name="contactMedium" type="uad:contactMediumType" minOccurs="0"/>
+			<xsd:element name="creditVetDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="creditVetPassed" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="customerType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="custnum" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="dateOfBirth" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="discountEligibilityFlag" type="uad:yesNoType" minOccurs="0"/>
+			<xsd:element name="dqListingDetail" type="uad:listingDetailType" minOccurs="0"/>
+			<xsd:element name="dqListingLevel" type="uad:listingLevelType" minOccurs="0"/>
+			<xsd:element name="domain" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="emailAddress" type="uad:emailAddressType" minOccurs="0"/>
+			<xsd:element name="forename" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="gender" type="uad:genderType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="genevaCustomerId" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="hasBeenBillingContact" type="uad:yesNoType" minOccurs="0"/>
+			<xsd:element name="hasHadRole" type="uad:yesNoType" minOccurs="0"/>
+			<xsd:element name="id" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="initials" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="isESMECustomer" type="uad:yesNoType" minOccurs="0"/>
+			<xsd:element name="jobFunction" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="jobTitle" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="key" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="lastname" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="level2Password" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="msisdn" type="xcore:msisdnType" minOccurs="0"/>
+			<xsd:element name="msisdnValid" type="uad:portalMSISDNStatusType" minOccurs="0"/>
+			<xsd:element name="network" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="numberOfEmployees" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="owningBusinessDivision" type="uad:owningBusinessDivisionType" minOccurs="0"/>
+			<xsd:element name="partner" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="password" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="phoneMake" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="posBusinessUnit" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="primaryAccountUser" type="uad:yesNoType" minOccurs="0"/>
+			<xsd:element name="referral" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="referralDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="registrationType" type="uad:userRegistrationType" minOccurs="0"/>
+			<xsd:element name="riskThreshold" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="riskThresholdDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="roleSummary" type="uad:customerRoleSummaryType" minOccurs="0"/>
+			<xsd:element name="saleDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="sector" type="uad:sectorType" minOccurs="0"/>
+			<xsd:element name="securityQuestion" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="securityAnswer" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="segmentation" type="uad:customerSegmentationType" minOccurs="0"/>
+			<xsd:element name="timeStamp" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="title" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="wantsGenieMarketing" type="uad:yesNoType" minOccurs="0"/>
+			<xsd:element name="wantsOtherMarketing" type="uad:yesNoType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="yesNoType">
+		<xsd:annotation>
+			<xsd:documentation>Yes/No boolean indicators</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Yes"/>
+			<xsd:enumeration value="No"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="addressType">
+		<xsd:annotation>
+			<xsd:documentation>Orange account registration address details</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="houseNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="houseName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="addressLine1" type="xsd:string"/>
+			<xsd:element name="addressLine2" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="townCity" type="xsd:string"/>
+			<xsd:element name="county" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="postcode" type="xsd:string"/>
+			<xsd:element name="country" type="xsd:string"/>
+			<xsd:element name="status" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="PTCABS" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="roleSetType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Orange account registration role set (user, chooser, superchooser)
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="userRole" type="uad:userRoleType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="chooserRole" type="uad:chooserRoleType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="superchooserRole" type="uad:superChooserRoleType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="superChooserRoleType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Orange account registration super-chooser role data
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="genevaCustomerId" type="xsd:string"/>
+			<xsd:element name="genevaCustomerName" type="xsd:string"/>
+			<xsd:element name="horizonCompanyCustnum" type="xsd:integer"/>
+			<xsd:element name="companyCustomerType" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="userRoleType">
+		<xsd:annotation>
+			<xsd:documentation>Orange account registration user role data</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="genevaAccountId" type="xsd:string"/>
+			<xsd:element name="genevaAccountName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="genevaCustomerId" type="xsd:string"/>
+			<xsd:element name="genevaCustomerName" type="xsd:string"/>
+			<xsd:element name="horizonCompanyCustnum" type="xsd:integer"/>
+			<xsd:element name="companyCustomerType" type="xsd:string"/>
+			<xsd:element name="msisdn" type="xcore:msisdnType"/>
+			<xsd:element name="accountType" type="uad:typeOfAccountType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="phoneNumberType">
+		<xsd:annotation>
+			<xsd:documentation>Telephone number, legal characters only</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="contactMediumType">
+		<xsd:annotation>
+			<xsd:documentation>
+				User-preferred method of contact for marketing purposes
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Voice"/>
+			<xsd:enumeration value="Email"/>
+			<xsd:enumeration value="SMS"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="listingDetailType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Directory listing detail specified by user (ex-directory etc)
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Full"/>
+			<xsd:enumeration value="Limited"/>
+			<xsd:enumeration value="Ex-Directory"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="listingLevelType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Directory listing level permission specified by user
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Not Opted"/>
+			<xsd:enumeration value="FNFA"/>
+			<xsd:enumeration value="Online/Printed/Voice"/>
+			<xsd:enumeration value="Online/Printed"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="emailAddressType">
+		<xsd:annotation>
+			<xsd:documentation>Email address string, username at domain</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="genderType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Gender indication; Male, Female, Undefined (M, F, U)
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="M"/>
+			<xsd:enumeration value="F"/>
+			<xsd:enumeration value="U"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="portalMSISDNStatusType">
+		<xsd:annotation>
+			<xsd:documentation>Mobile phone number status within portal</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Yes"/>
+			<xsd:enumeration value="No"/>
+			<xsd:enumeration value="Info"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="owningBusinessDivisionType">
+		<xsd:annotation>
+			<xsd:documentation>O2 owning business division</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Online"/>
+			<xsd:enumeration value="O2UK"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="userRegistrationType">
+		<xsd:annotation>
+			<xsd:documentation>User registration type (P/B)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="P"/>
+			<xsd:enumeration value="B"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="customerRoleSummaryType">
+		<xsd:annotation>
+			<xsd:documentation>Customer role summary - values not yet defined</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="sectorType">
+		<xsd:annotation>
+			<xsd:documentation>Business sector type</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Advertising and Design"/>
+			<xsd:enumeration value="Agriculture"/>
+			<xsd:enumeration value="Architect Services"/>
+			<xsd:enumeration value="Construction"/>
+			<xsd:enumeration value="Education"/>
+			<xsd:enumeration value="Engineering"/>
+			<xsd:enumeration value="Financial Services"/>
+			<xsd:enumeration value="Government/Council Services"/>
+			<xsd:enumeration value="Health"/>
+			<xsd:enumeration value="Information Technology"/>
+			<xsd:enumeration value="Legal"/>
+			<xsd:enumeration value="Leisure"/>
+			<xsd:enumeration value="Consultant"/>
+			<xsd:enumeration value="Manufacturing"/>
+			<xsd:enumeration value="Office/General Supplies"/>
+			<xsd:enumeration value="Estate Management"/>
+			<xsd:enumeration value="Utilities"/>
+			<xsd:enumeration value="Other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="customerSegmentationType">
+		<xsd:annotation>
+			<xsd:documentation>Customer account segmentation type</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Platinum"/>
+			<xsd:enumeration value="Gold"/>
+			<xsd:enumeration value="Silver"/>
+			<xsd:enumeration value="Bronze"/>
+			<xsd:enumeration value="Select"/>
+			<xsd:enumeration value="none"/>
+			<xsd:enumeration value="Sel_Inv"/>
+			<xsd:enumeration value="Sel_Few"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="chooserRoleType">
+		<xsd:annotation>
+			<xsd:documentation>Orange account registration chooser role</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="genevaAccountId" type="xsd:string"/>
+			<xsd:element name="genevaAccountName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="genevaCustomerId" type="xsd:string"/>
+			<xsd:element name="genevaCustomerName" type="xsd:string"/>
+			<xsd:element name="companyCustomerType" type="xsd:string"/>
+			<xsd:element name="horizonCompanyCustnum" type="xsd:integer"/>
+			<xsd:element name="accountType" type="uad:typeOfAccountType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="typeOfAccountType">
+		<xsd:annotation>
+			<xsd:documentation>Account type (L2M/RevenueShare/Consumer)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="L2M"/>
+			<xsd:enumeration value="RevenueShare"/>
+			<xsd:enumeration value="Consumer"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<!-- Added newly for compliance with new naming standards aligning Technical services with Business Services
+		 Here, we simply re-use the userDataType, which is aligned to Business Service standards. 
+	:- Raghu Ugare (27 Sep, 2010)
+	-->
+	<xsd:simpleType name="crudType">
+		<xsd:annotation>
+			<xsd:documentation>Possible Values for Action Element</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Create"/>
+			<xsd:enumeration value="Read"/>
+			<xsd:enumeration value="Update"/>
+			<xsd:enumeration value="Delete"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="userDetailsType">
+		<xsd:annotation>
+			<xsd:documentation>A complex type holding various user-details along with a CRUD field</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="action" type="uad:crudType" minOccurs="0"/>
+			<xsd:element name="userData" type="uad:userDataType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- ## Types for searchOnlineAccounts_1 operation ## -->
+	<xsd:complexType name="searchOnlineAccounts_1">
+		<xsd:annotation>
+			<xsd:documentation>Request for searchOnlineAccounts_1 operation
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="searchCriteria" type="uad:searchCriteriaType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="searchOptions" type="uad:searchOptionsType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="sortOrder" type="uad:sortOrderType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="returnPartialSearchResults" type="uad:returnPartialSearchResultsType" minOccurs="0"/>			
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="searchOnlineAccounts_1Response">
+		<xsd:annotation>
+			<xsd:documentation>Response for searchOnlineAccounts_1 operation
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="searchResultStatus" type="xcore:ServiceResultType"/>
+			<xsd:element name="count" type="xsd:integer"/>
+			<xsd:element name="userDetailRecord" type="uad:userDetailRecordType" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="searchCriteriaType">
+		<xsd:annotation>
+			<xsd:documentation>Type used for holding the criteria to be used in
+				the search</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="customerNumber" type="reg2:customerNumberType" minOccurs="0"/>
+			<xsd:element name="msisdn" type="xcore:msisdnType" minOccurs="0"/>
+			<xsd:element name="userName" type="uad:userNameMatchingType" minOccurs="0"/>				
+			<xsd:element name="firstName" type="uad:firstNameMatchingType" minOccurs="0"/>
+			<xsd:element name="lastName" type="uad:lastNameType" minOccurs="0"/>
+			<xsd:element name="password" type="uad:passwordType" minOccurs="0"/>
+			<xsd:element name="postCode" type="uad:postCodeMatchingType" minOccurs="0"/>
+			<xsd:element name="identityUID" type="xcore:identityUIDType" minOccurs="0"/>						
+			<xsd:element name="bfId" type="xcore:customerIDType" minOccurs="0"/>			
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="passwordType">
+		<xsd:annotation>
+			<xsd:documentation>Password, plaintext, with basic complexity
+				enforcement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="6"/>
+			<xsd:pattern value=".*[0-9].*"/>
+			<xsd:pattern value=".*[A-Z].*"/>
+			<xsd:pattern value=".*[a-z].*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="userDetailRecordType">
+		<xsd:annotation>
+			<xsd:documentation>Type returning users' details [extracted from the
+				Registration platform]</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="identityData" type="uad:identityDataType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="profileData" type="uad:profileDataType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="portalData" type="uad:portalDataType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="billingData" type="uad:billingDataType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="billingMsisdn" type="uad:billingMsisdnType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="legacyAandRCustomerData" type="uad:legacyAandRCustomerDataType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="broadbandData" type="uad:broadbandDataType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="userRole" type="uad:identityUserRoleType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="chooserRole" type="uad:identityChooserRoleType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="superChooserRole" type="uad:identitySuperchooserRoleType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="accountLinkage" type="uad:accountLinkageType" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="searchOptionsType">
+		<xsd:annotation>
+			<xsd:documentation>Defines other aspects of the search behaviour.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="portalOrIdentitySwitch"
+				type="uad:portalOrIdentitySwitchType" maxOccurs="1" minOccurs="0" />
+			<xsd:element name="searchResults"
+				type="uad:searchResultsType" />
+			<xsd:element name="returnOrphanedAccount" type="xsd:boolean" maxOccurs="1" minOccurs="0"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="searchResultsType">
+		<xsd:annotation>
+			<xsd:documentation>Type which controls what data is to be returned in search results.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+		<xsd:element name="allOrSummary" type="uad:allOrSummaryType"/>
+		<xsd:sequence>
+			<xsd:element name="resultSpecificData" type="uad:resultSpecificDataType" minOccurs="1" maxOccurs="6"/>
+		</xsd:sequence>
+		</xsd:choice>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="allOrSummaryType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ALL"/>
+			<xsd:enumeration value="SUMMARY"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="resultSpecificDataType">
+		<xsd:annotation>
+			<xsd:documentation>
+			The allowed values for the various data-types that can be returned by the search
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="legacyAandRCustomerInfo"/>
+			<xsd:enumeration value="portalInfo"/>
+			<xsd:enumeration value="broadbandInfo"/>
+			<xsd:enumeration value="billingInfo"/>			
+			<xsd:enumeration value="roleInfo"/>
+			<xsd:enumeration value="accountLinkageInfo"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="returnPartialSearchResultsType">
+		<xsd:annotation>
+			<xsd:documentation>
+			If provided, this enables partial search results to be returned, 
+			although the search matched more number of records than the maximum threshold allowed.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Y"/>
+		</xsd:restriction>
+	</xsd:simpleType>	
+
+	<xsd:complexType name="sortOrderType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Defines the sort order; the set is an ordered
+				collection. The first order field should be specified first; second
+				order fields will be consulted should the first order field not
+				result in a unique ordering of results, and so on.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>		
+		<xsd:element name="sortBy" type="uad:sortByType">
+			<xsd:annotation>
+				<xsd:documentation>The matched accounts will be sorted by the given
+					criterion</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		<xsd:element name="sortDirection" type="uad:sortDirectionType">
+			<xsd:annotation>
+				<xsd:documentation>Defines the direction of sort as ascending or
+					descending.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="matchingConditionType">
+		<xsd:annotation>
+			<xsd:documentation>
+			Indicator specifying how to perform matching of a field.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="EXACT"/>
+			<xsd:enumeration value="STARTING_WITH"/>
+			<xsd:enumeration value="ENDING_WITH"/>
+			<xsd:enumeration value="SUBSTRING"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="userNameMatchingType">
+		<xsd:annotation>
+			<xsd:documentation>
+			userName type for search with an extra attribute denoting the kind of matching required.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="matchingCondition" type="uad:matchingConditionType" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="firstNameMatchingType">
+		<xsd:annotation>
+			<xsd:documentation>
+			firstName type for search with an extra attribute denoting the kind of matching required.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="matchingCondition" type="uad:matchingConditionType" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="lastNameType">
+		<xsd:annotation>
+			<xsd:documentation>
+			lastName type
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="matchingCondition" type="uad:matchingConditionType" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="postCodeMatchingType">
+		<xsd:annotation>
+			<xsd:documentation>
+			postCode type with an extra attribute denoting the kind of matching required.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="matchingCondition" type="uad:matchingConditionType" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="identityDataType">
+		<xsd:annotation>
+			<xsd:documentation>
+			Container to hold the Portal-Identity related information.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="identityUID" type="xcore:identityUIDType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="identityUsername" type="xcore:identityUsernameType" minOccurs="0" maxOccurs="1"/> 
+			<xsd:element name="fullName" type="uad:fullNameType" minOccurs="0" maxOccurs="1"/>						
+			<xsd:element name="isEmailValidated" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="sortByType">
+		<xsd:annotation>
+			<xsd:documentation>List of fields that can be used as part of the
+				search sort criteria</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="BILLING"/>
+			<xsd:enumeration value="BROADBAND"/>
+			<xsd:enumeration value="MODIFIED"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="sortDirectionType">
+		<xsd:annotation>
+			<xsd:documentation>List of sort orders that can be applied to the
+				results that are returned (ascending or descending)
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="asc"/>
+			<xsd:enumeration value="desc"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="portalOrIdentitySwitchType">
+		<xsd:annotation>
+			<xsd:documentation>
+			Informs the search what it should match the supplied userName against: 
+			either the portal account userName or the identity userName. 
+			(Only relevant for search on the userName.)
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="PORTAL"/> 
+			<xsd:enumeration value="IDENTITY"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="registeredMsisdnType">
+		<xsd:annotation>
+			<xsd:documentation>The user's registered mobile phone.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="msisdn" type="xcore:msisdnType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="make" type="reg2:phoneMakeType" minOccurs="0"/>
+			<xsd:element name="isMsisdnValidated" type="xsd:boolean" minOccurs="0"/> 
+			<xsd:element name="msisdnValidatedDate" type="xsd:dateTime" minOccurs="0"/> 
+			<xsd:element name="msisdnValidToken" type="reg2:msisdnStatusTokenType" minOccurs="0"/>
+			<xsd:element name="msisdnVerificationCode" type="reg2:msisdnVerificationCodeType" minOccurs="0"/>
+			<xsd:element name="isMsisdnBarred" type="xsd:boolean" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="marketingPreferencesType">
+		<xsd:annotation>
+			<xsd:documentation>List of named marketing flags (currently numbering
+				two, may grow/shrink in future).</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="isGenieMarketingRequired" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="isOtherMarketingRequired" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="fullNameType">
+		<xsd:annotation>
+			<xsd:documentation>User's broken down full name.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="title" type="reg2:shortNameType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="lastName" type="reg2:extendedNameType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="initials" type="reg2:extendedNameType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="foreName" type="reg2:extendedNameType" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="profileDataType"> 
+		<xsd:annotation>
+			<xsd:documentation>Core A&amp;R profile data only.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="gender" type="xcore:genderType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="dateOfBirth" type="xsd:date" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="address" type="reg2:portalAddressType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="mobilePhoneDetails" type="uad:registeredMsisdnType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="alternativeContactNumber" type="uad:phoneNumberType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="alternativeEmailAddress" type="xcore:emailAddressType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="preferredContactMedium" type="uad:contactMediumType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="marketingPreferences" type="uad:marketingPreferencesType" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="billingDataType">
+		<xsd:annotation>
+			<xsd:documentation>Billing information</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="billingMsisdn" type="xcore:msisdnType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="billingAccountId" type="reg2:billingAccountIdType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="billingAccountName" type="reg2:billingAccountNameType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="billingAccountType" type="reg2:accountCategoryType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="owningPortalAccount" type="reg2:identityReferenceType" minOccurs="0"/>
+			<xsd:element name="customerNumber" type="reg2:customerNumberType" maxOccurs="1" minOccurs="0"/>			
+		</xsd:sequence>			
+	</xsd:complexType>
+
+	<xsd:complexType name="broadbandSecondaryAccountList">
+		<xsd:annotation>
+			<xsd:documentation>Lists the secondary portal accounts associated
+				with a Broadband primary account.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="userInfo" type="reg2:identityReferenceType" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="broadbandDataType">
+		<xsd:annotation>
+			<xsd:documentation>Broadband information</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="broadbandAccountId" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="broadbandAccountType" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="broadbandPackage" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="broadbandStatus" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="emailAddress" type="xcore:emailAddressType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="broadbandActivatedDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="broadbandCeasedDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="broadbandOrderedDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="broadbandPartialOrderedDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="broadbandTerminatedDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="primaryPortalAccount" type="reg2:identityReferenceType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="secondaryPortalAccounts" type="uad:broadbandSecondaryAccountList" minOccurs="0"/>
+			<xsd:element name="customerNumber" type="reg2:customerNumberType" maxOccurs="1" minOccurs="0"/>
+		</xsd:sequence>		
+	</xsd:complexType>
+
+	<xsd:complexType name="portalDataType">
+		<xsd:annotation>
+			<xsd:documentation>Portal information</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="portalId" type="xcore:portalIDType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="domain" type="reg2:domainType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="bfId" type="xcore:customerIDType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="mobilePhoneDetails" type="uad:registeredMsisdnType" minOccurs="0"/>			
+			<xsd:element name="fullName" type="uad:fullNameType" minOccurs="0"/>
+			<xsd:element name="gender" type="xcore:genderType" minOccurs="0"/>
+			<xsd:element name="dateOfBirth" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="alternativeContactNumber" type="uad:phoneNumberType" minOccurs="0"/>
+			<xsd:element name="alternativeEmailAddress" type="xcore:emailAddressType" minOccurs="0"/>
+			<xsd:element name="preferredContactMedium" type="uad:contactMediumType" minOccurs="0"/>			
+			<xsd:element name="address" type="reg2:portalAddressType" minOccurs="0"/>
+			<xsd:element name="marketingPreferences" type="uad:marketingPreferencesType" minOccurs="0"/>
+			<xsd:element name="customerNumber" type="reg2:customerNumberType" maxOccurs="1" minOccurs="0"/>
+		</xsd:sequence>		
+	</xsd:complexType>
+
+	<xsd:complexType name="legacyAandRCustomerDataType">
+		<xsd:annotation>
+			<xsd:documentation>Information not contained in above types,
+				specifically for use of Strategic A&amp;R co-existence. (Do not rely
+				on this continuing to be supported for other purposes.)
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="portalId" type="xcore:portalIDType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="domain" type="reg2:domainType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="status" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="statusUpdatedBy" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="statusUpdatedTime" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="partner" type="reg2:partnerType" minOccurs="0"/>
+			<xsd:element name="network" type="reg2:networkType" minOccurs="0"/>
+			<xsd:element name="addressStatus" type="reg2:addressStatusType" minOccurs="0"/>
+			<xsd:element name="companyName" type="reg2:companyNameType" minOccurs="0"/>
+			<xsd:element name="billingCustomerId" type="reg2:billingCustomerIdType" minOccurs="0"/>
+			<xsd:element name="billingCustomerName" type="reg2:billingCustomerNameType" minOccurs="0"/>
+			<xsd:element name="segmentation" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="customerType" type="reg2:customerCategoryType" minOccurs="0"/>
+			<xsd:element name="posBusinessUnit" type="reg2:posBusinessUnitType" minOccurs="0"/>
+			<xsd:element name="saleDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="riskThreshold" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="riskThresholdDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="referral" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="referralDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="companyPhone" type="xcore:msisdnType" minOccurs="0"/>
+			<xsd:element name="companyEmployees" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="jobTitle" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="jobFunction" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ptCaps" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="creditVetPassed" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="creditVetDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="verificationCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="remindCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="remindCount" type="xsd:integer" minOccurs="0"/>
+			<xsd:element name="remindDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="startDate" type="xsd:date" minOccurs="0"/>			
+			<xsd:element name="hasHadRole" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="hasBeenBillingContact" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="owningBusinessDivision" type="reg2:owningBusinessDivisionType" minOccurs="0"/>
+			<xsd:element name="registrationType" type="reg2:registrationCategoryType" minOccurs="0"/>
+			<xsd:element name="sector" type="reg2:sectorType" minOccurs="0"/>
+			<xsd:element name="isESMECustomer" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="companyRegNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="accountManagerName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="accountManagerEmail" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="modifiedDate" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="additionalAttributes" type="uad:additionalAttributesType" minOccurs="0"/>
+			<xsd:element name="customerNumber" type="reg2:customerNumberType" maxOccurs="1" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="additionalAttributesType">
+		<xsd:annotation>
+			<xsd:documentation>Holds additional attributes pertaining to legacyAandRCustomerDataType.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="directoryEntryType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="directoryEntryFormat" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="directoryEntryLastModifiedDate" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="directoryEntryLastModifiedBy" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="companionAdministrator" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="directoryEntryListingLevel" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="credentialRemindersAccountNumberUsedFlag" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="accountLinkageType">
+		<xsd:annotation>
+			<xsd:documentation>Holds information related to the A&amp;R linked
+				account record that is not available from other sources.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="linkedAccount" type="uad:linkedAccountType" minOccurs="1" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>A list of one or more accounts that have been
+						linked under the identity.</xsd:documentation>
+				</xsd:annotation>				
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="linkedAccountType">
+		<xsd:annotation>
+			<xsd:documentation>Holds information related to the A&amp;R linked
+				account.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="label" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="identityReference" type="reg2:identityReferenceType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="isDefault" type="xsd:boolean" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Exactly one account will be identified as the
+								default account within the set of linked accounts.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>					
+	</xsd:complexType>
+
+	<xsd:complexType name="billingMsisdnType">
+		<xsd:annotation>
+			<xsd:documentation>Holds information related to the A&amp;R billing
+				msisdn record that is not available from other sources.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="owningPortalAccount" type="reg2:identityReferenceType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="billingMsisdn" type="xcore:msisdnType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="status" type="reg2:billingMsisdnStatusType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="serviceStatus" type="reg2:billingMsisdnServiceStatusType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="msisdnType" type="xcore:PaymentCategoryType" maxOccurs="1" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="identityUserRoleType">
+		<xsd:annotation>
+			<xsd:documentation>User role type (with reference to the owning
+				Portal Account). This type also has additional identity related data.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="reg2:userRoleType">
+				<xsd:sequence>
+					<xsd:element name="identityReference" type="reg2:identityReferenceType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="identityChooserRoleType">
+		<xsd:annotation>
+			<xsd:documentation>Chooser role type (with reference to the owning
+				Portal Account). This type also has additional identity related data.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="reg2:chooserRoleType">
+				<xsd:sequence>
+					<xsd:element name="identityReference" type="reg2:identityReferenceType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="identitySuperchooserRoleType">
+		<xsd:annotation>
+			<xsd:documentation>Super-chooser role type (with reference to the
+				owning Portal Account). This type also has additional identity related data.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="reg2:superChooserRoleType">
+				<xsd:sequence>
+					<xsd:element name="identityReference" type="reg2:identityReferenceType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+		
+</xsd:schema>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" class="no-js" lang="en">
+   <head>
+	  <base target="_parent">
+      #parse("head.vm")
+   </head>
+   <body>
+      <div class="module19Box" id="module19Box">
+      <div class="default-content-container no-padding">
+         #parse("serverError.vm")
+         <h2 class="iframe-error-head">
+         #parse("heading.vm")
+         </h2>
+         <div class="text iframe-error-content">
+            <p class="iframe-error-color">Oops. Something went wrong.</p>
+            <p>We've got our best technicians on the case. Try again, or come back later.</p>
+            <span>
+               Looking for something else?
+               <ul>
+                  <li>Go to our <a href="//www.o2.co.uk/">homepage</a> to find offers and info</li>
+                  <li><a href="//www.o2.co.uk/help">Get help</a> with your tariff, device and more</li>
+               </ul>
+            </span>
+         </div>
+      </div>
+   </body>
+</html>

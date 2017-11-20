@@ -1,0 +1,174 @@
+<!--
+	Date			Change		Author		Change Description
+	19/05/2011     	1.0.4	    Raghu    	Added WS-Security Policy for plain-text UsernameToken to searchOnlineAccounts_1 operation.
+	05/05/2011     	1.0.3	    Raghu    	Added searchOnlineAccounts_1 operation and its associated sections
+	10/11/2010		1.0.2		Raghu		Changed from getUserNameSuggestions to getUserNameSuggestion
+	20/09/2010     	1.0.1	    Raghu    	Added createOrUpdateUser and getUserNameSuggestions operations
+	17/07/2009     	1.0.0	    Arjun    	Initial Version
+-->
+<wsdl:definitions name="UserAccounts" targetNamespace="http://soa.o2.co.uk/useraccountsservice_1" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:uas="http://soa.o2.co.uk/useraccountsservice_1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:uad="http://soa.o2.co.uk/useraccountsdata_1" xmlns:p="http://www.w3.org/2001/XMLSchema">
+	<!-- Policy for UsernameToken with plaintext password, sent from client to
+    server only -->
+  	<wsp:Policy wsu:Id="UsernameToken" xmlns:wsu=
+      "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+      xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SupportingTokens
+            xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <wsp:Policy>
+            <sp:UsernameToken sp:IncludeToken=".../IncludeToken/AlwaysToRecipient"/>
+          </wsp:Policy>
+        </sp:SupportingTokens>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="http://soa.o2.co.uk/useraccountsdata_1" schemaLocation="useraccountsdata_1_0.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="getUserDetails">
+		<wsdl:part name="getUserDetails" element="uad:getUserDetails"/>
+	</wsdl:message>
+	<wsdl:message name="getUserDetailsResponse">
+		<wsdl:part name="getUserDetailsResponse" element="uad:getUserDetailsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getUserDetailsFault">
+		<wsdl:part name="getUserDetailsFault" element="uad:getUserDetailsFault"/>
+	</wsdl:message>
+	<wsdl:message name="search">
+		<wsdl:part name="search" element="uad:search"/>
+	</wsdl:message>
+	<wsdl:message name="searchResponse">
+		<wsdl:part name="searchResponse" element="uad:searchResponse"/>
+	</wsdl:message>
+	<wsdl:message name="searchFault">
+		<wsdl:part name="searchFault" element="uad:searchFault"/>
+	</wsdl:message>
+	<wsdl:message name="createOrUpdateUser">
+		<wsdl:part name="createOrUpdateUser" element="uad:createOrUpdateUser"/>
+	</wsdl:message>
+	<wsdl:message name="createOrUpdateUserResponse">
+		<wsdl:part name="createOrUpdateUserResponse" element="uad:createOrUpdateUserResponse"/>
+	</wsdl:message>
+	<wsdl:message name="createOrUpdateUserFault">
+		<wsdl:part name="createOrUpdateUserFault" element="uad:createOrUpdateUserFault"/>
+	</wsdl:message>
+	<wsdl:message name="getUserNameSuggestion">
+		<wsdl:part name="getUserNameSuggestion" element="uad:getUserNameSuggestion"/>
+	</wsdl:message>
+	<wsdl:message name="getUserNameSuggestionResponse">
+		<wsdl:part name="getUserNameSuggestionResponse" element="uad:getUserNameSuggestionResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getUserNameSuggestionFault">
+		<wsdl:part name="getUserNameSuggestionFault" element="uad:getUserNameSuggestionFault"/>
+	</wsdl:message>
+	<wsdl:message name="searchOnlineAccounts_1">
+		<wsdl:part name="searchOnlineAccounts_1" element="uad:searchOnlineAccounts_1"/>
+	</wsdl:message>
+	<wsdl:message name="searchOnlineAccounts_1Response">
+		<wsdl:part name="searchOnlineAccounts_1Response" element="uad:searchOnlineAccounts_1Response"/>
+	</wsdl:message>
+	<wsdl:message name="searchOnlineAccounts_1Fault">
+		<wsdl:part name="searchOnlineAccounts_1Fault" element="uad:searchOnlineAccounts_1Fault"/>
+	</wsdl:message>
+	<wsdl:portType name="UserAccountsPortType">
+		<wsdl:operation name="getUserDetails">
+			<wsdl:input name="getUserDetails" message="uas:getUserDetails"/>
+			<wsdl:output name="getUserDetailsResponse" message="uas:getUserDetailsResponse"/>
+			<wsdl:fault name="getUserDetailsFault" message="uas:getUserDetailsFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="search">
+			<wsdl:input name="search" message="uas:search"/>
+			<wsdl:output name="searchResponse" message="uas:searchResponse"/>
+			<wsdl:fault name="searchFault" message="uas:searchFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="createOrUpdateUser">
+			<wsdl:input name="createOrUpdateUser" message="uas:createOrUpdateUser"/>
+			<wsdl:output name="createOrUpdateUserResponse" message="uas:createOrUpdateUserResponse"/>
+			<wsdl:fault name="createOrUpdateUserFault" message="uas:createOrUpdateUserFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getUserNameSuggestion">
+			<wsdl:input name="getUserNameSuggestion" message="uas:getUserNameSuggestion"/>
+			<wsdl:output name="getUserNameSuggestionResponse" message="uas:getUserNameSuggestionResponse"/>
+			<wsdl:fault name="getUserNameSuggestionFault" message="uas:getUserNameSuggestionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="searchOnlineAccounts_1">
+			<wsdl:input name="searchOnlineAccounts_1" message="uas:searchOnlineAccounts_1"/>
+			<wsdl:output name="searchOnlineAccounts_1Response" message="uas:searchOnlineAccounts_1Response"/>
+			<wsdl:fault name="searchOnlineAccounts_1Fault" message="uas:searchOnlineAccounts_1Fault"/>
+		</wsdl:operation>
+		</wsdl:portType>
+	<wsdl:binding name="UserAccountsSoapBinding" type="uas:UserAccountsPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getUserDetails">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="getUserDetails">
+				<soap:body parts="getUserDetails" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getUserDetailsResponse">
+				<soap:body parts="getUserDetailsResponse" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="getUserDetailsFault">
+				<soap:fault name="getUserDetailsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="search">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="search">
+				<soap:body parts="search" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="searchResponse">
+				<soap:body parts="searchResponse" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="searchFault">
+				<soap:fault name="searchFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="createOrUpdateUser">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="createOrUpdateUser">
+				<soap:body parts="createOrUpdateUser" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="createOrUpdateUserResponse">
+				<soap:body parts="createOrUpdateUserResponse" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="createOrUpdateUserFault">
+				<soap:fault name="createOrUpdateUserFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getUserNameSuggestion">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="getUserNameSuggestion">
+				<soap:body parts="getUserNameSuggestion" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getUserNameSuggestionResponse">
+				<soap:body parts="getUserNameSuggestionResponse" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="getUserNameSuggestionFault">
+				<soap:fault name="getUserNameSuggestionFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="searchOnlineAccounts_1">
+			<wsp:PolicyReference
+          		xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+          		URI="#UsernameToken"/>
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="searchOnlineAccounts_1">				
+				<soap:body parts="searchOnlineAccounts_1" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="searchOnlineAccounts_1Response">
+				<soap:body parts="searchOnlineAccounts_1Response" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="searchOnlineAccounts_1Fault">
+				<soap:fault name="searchOnlineAccounts_1Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>	
+	</wsdl:binding>
+	<wsdl:service name="UserAccounts">
+		<wsdl:port name="UserAccountsPortTypeSoapPort" binding="uas:UserAccountsSoapBinding">
+			<soap:address location="https://sdpapi.o2.co.uk/services/UserAccounts_1_0"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

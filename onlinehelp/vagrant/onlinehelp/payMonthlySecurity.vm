@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" class="no-js" lang="en">
+
+<head>
+    #parse("head.vm")
+</head>
+
+<body>
+<div class="module19Box" id="module19Box">
+    <div class="grid">
+        <div class="grid-row">
+            <div class="default-content-container">
+                #parse("serverError.vm")
+
+                #parse("heading.vm")
+
+                <!-- User Journey steps -->
+                <div class="journeyWrapper">
+                    <div class="stepCounter">
+                        <span class="stepIcon"><img src="_asset/img/1-unselected.png"/></span>
+                        <span class="lineBG"></span>
+                        <span class="stepIcon"><img src="_asset/img/2-selected.png"/></span>
+                        <span class="lineBG"></span>
+                        <span class="stepIcon"><img src="_asset/img/3-unselected.png"/></span>
+                    </div>
+                    <div class="stepCopy">
+                        <span class="stepDetail first">Your details</span>
+                        <span class="stepDetail second active">Your security details</span>
+                        <span class="stepDetail third">Additional information</span>
+                    </div>
+                </div>
+                <!-- End - User Journey steps -->
+
+                <h3>Your security details</h3>
+
+                <div class="text">
+                    <p>Enter the characters from your password.</p>
+                    <p>Don't forget - this is the password you use to contact customer services, not
+                        the one you use to sign into our website.</p>
+                </div>
+
+
+                <form method="POST" name="onlineForm" class="onlineForm" id="onlineForm"
+                      action="$journey">
+                    <div class="characterFieldRow">
+                        <label class="margin-bottom-10">Character 2*</label>
+                        <input type="password" name="char2" id="char2" class="char2" maxlength="1"
+                               value="$securityDetails.char2" required/>
+                        <span class="errorMsg">Fill in to continue.</span>
+                    </div>
+                    <div class="characterFieldRow">
+                        <label class="margin-bottom-10">Character 3*</label>
+                        <input type="password" name="char3" id="char3" class="char3" maxlength="1"
+                               value="$securityDetails.char3" required/>
+                        <span class="errorMsg ">Fill in to continue.</span>
+                    </div>
+                    <div class="formFieldRow">
+                        <div class="ctaConfigurableIcon noPassword"><span class="chevronButton">
+                            <a id="forgotPassword" href="$journey">I don't know my
+                            password</a></span>
+                        </div>
+                    </div>
+                    <input type="hidden" name="pageInfo" id="pageInfo" class="pageInfo"
+                           value="security"/>
+                    <input type="hidden" name="journey" id="journey" value="$journey"/>
+					<input type="hidden" name="csrfToken" id="csrfToken" value="$csrfToken"/>					
+                    <div class="formFieldRow">
+                        <input class="online-form-previous margin-bottom-10" type="button"
+                               onclick="javascript: form.action='previous';"
+                               id="step-previous"
+                               alt="Previous"
+                               value="Previous" title="Previous"/>
+                        <input class="online-form-next margin-bottom-10" type="submit"
+                               id="step-2-next" alt="Next" value="Next" title="Next"/>
+                    </div>
+                    <div class="formFieldRow">
+                        <div class="ctaConfigurableIcon cancelButton"><span class="cancelIcon"><a
+                                href="cancel">Cancel</a></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

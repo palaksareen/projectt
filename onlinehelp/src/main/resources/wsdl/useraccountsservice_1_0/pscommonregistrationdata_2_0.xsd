@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+		Date 		 Change    Author 	   Change-Description
+		15/07/2011	 1.0.1	   Raghu	   Minor changes to multiplicity of elements, based on new clarifications.
+		09/06/2011   1.0.0     Raghu       Initial version after introducing UserAccounts-searchOnlineAccounts_1 operation
+	-->
+<xsd:schema targetNamespace="http://soa.o2.co.uk/pscommonregistrationdata_2" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:reg="http://soa.o2.co.uk/pscommonregistrationdata_2" xmlns:xcore="http://soa.o2.co.uk/coredata_1">
+	<xsd:import namespace="http://soa.o2.co.uk/coredata_1" schemaLocation="coredata_1_1.xsd"/>
+	<xsd:simpleType name="customerCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>
+			Customer Category type -- 
+			CON (Consumer), 
+			SOL (Sole Trader), 
+			PAR (Partner), 
+			LTD (Public Limited Company), 
+			CHA (Charity)
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="contactMediumType">
+		<xsd:annotation>
+			<xsd:documentation>Contact medium type (Voice/Email/SMS)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">			
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="owningBusinessDivisionType">
+		<xsd:annotation>
+			<xsd:documentation>Owning business division type (Online/O2UK)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">		
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="registrationCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>Registration category type - P, B</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="accountCategoryType">
+		<xsd:annotation>
+			<xsd:documentation>Account category (L2M/RevenueShare/Consumer)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="sectorType">
+		<xsd:annotation>
+			<xsd:documentation>Sector type - 
+								1. Advertising and Design
+								2. Agriculture
+								3. Architect Services
+								4. Construction
+								5. Education"
+								6. Engineering
+								7. Financial Services
+								8. Government/Council Services
+								9. Health
+								10. Information Technology
+								11. Legal
+								12. Leisure
+								13. Consultant
+								14. Manufacturing
+								15. Office/General Supplies
+								16. Estate Management
+								17. Utilities
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="portalAddressType">
+		<xsd:annotation>
+			<xsd:documentation>Complex Type for defining location address
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="houseNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="houseName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="addressLine1" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="addressLine2" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="townCity" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="county" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="postcode" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="country" type="xsd:string" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="status" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- ## Types added during the design of searchOnlineAccount_1 operation of UserAccounts service ## -->
+	
+		<xsd:simpleType name="billingMsisdnStatusType">
+		<xsd:annotation>
+			<xsd:documentation>The status of a billing msisdn</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ACTIVE" />
+			<xsd:enumeration value="INACTIVE" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="billingMsisdnServiceStatusType">
+		<xsd:annotation>
+			<xsd:documentation>The service status of a billing msisdn. The possible values:
+			INSTALL
+			DISCONNECT
+			RECONNECT
+			PIN
+			POUT
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>		
+	</xsd:simpleType>
+
+	<xsd:simpleType name="networkType">
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="partnerType">
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="addressStatusType">
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="companyNameType">
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="billingCustomerIdType">
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="billingCustomerNameType">
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="posBusinessUnitType">
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="cryptographicTokenType">
+		<xsd:annotation>
+			<xsd:documentation>An opaque token that is provided by the
+				registration system, and should be used for a given purpose without
+				transformation or modification.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="shortAddressLineType">
+		<xsd:annotation>
+			<xsd:documentation>Address text</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="20" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="addressLineTypeLong">
+		<xsd:annotation>
+			<xsd:documentation>Address text</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="80" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="phoneMakeType">
+		<xsd:annotation>
+			<xsd:documentation>Phone make type (e.g., Nokia)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="20" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="extendedNameType">
+		<xsd:annotation>
+			<xsd:documentation>First, last or other name component.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="20" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="shortNameType">
+		<xsd:annotation>
+			<xsd:documentation>Title or other name component.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="5" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="customerNumberType">
+		<xsd:annotation>
+			<xsd:documentation>Type used for customerNumber within portal information
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:integer"/>		
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="domainType">
+		<xsd:annotation>
+			<xsd:documentation>Type used for domain as part of the address
+				information</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="30" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="billingAccountIdType">
+		<xsd:annotation>
+			<xsd:documentation>Type used for geneva account id within billing
+				information</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>		
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="billingAccountNameType">
+		<xsd:annotation>
+			<xsd:documentation>Type used for geneva account name within billing
+				information</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>		
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="msisdnStatusTokenType">
+		<xsd:annotation>
+			<xsd:documentation>A token that allows A&amp;R to be assured that the
+				quoted MSISDN has been validated without having a trust relationship
+				with the caller.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="reg:cryptographicTokenType" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="emailStatusTokenType">
+		<xsd:annotation>
+			<xsd:documentation>A token that allows A&amp;R to be assured that the
+				quoted e-mail address has been validated without having a trust
+				relationship with the caller.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="reg:cryptographicTokenType" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="msisdnVerificationCodeType">
+		<xsd:annotation>
+			<xsd:documentation>Verification Code</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="4" />
+			<xsd:maxLength value="6" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="emailVerificationCodeType">
+		<xsd:annotation>
+			<xsd:documentation>Verification Code</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+
+	<xsd:complexType name="identityReferenceType">
+		<xsd:annotation>
+			<xsd:documentation>Identifying information only.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="identityUID" type="xcore:identityUIDType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="identityUserName" type="xcore:identityUsernameType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="domain" type="reg:domainType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="bfId" type="xcore:customerIDType" maxOccurs="1" minOccurs="0"/>					
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="userRoleType">
+		<xsd:annotation>
+			<xsd:documentation>Orange account registration user role data</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="billingAccountId" type="reg:billingAccountIdType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="billingAccountName" type="reg:billingAccountNameType" minOccurs="0"/>
+			<xsd:element name="billingCustomerId" type="reg:billingCustomerIdType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="billingCustomerName" type="reg:billingCustomerNameType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="companyCustnum" type="reg:customerNumberType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="companyCustomerType" type="reg:customerCategoryType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="msisdn" type="xcore:msisdnType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="accountType" type="reg:accountCategoryType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="chooserRoleType">
+		<xsd:annotation>
+			<xsd:documentation>Orange account registration chooser role</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="billingAccountId" type="reg:billingAccountIdType" minOccurs="0"/>
+			<xsd:element name="billingAccountName" type="reg:billingAccountNameType" minOccurs="0"/>
+			<xsd:element name="billingCustomerId" type="reg:billingCustomerIdType" minOccurs="0"/>
+			<xsd:element name="billingCustomerName" type="reg:billingCustomerNameType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="companyCustomerType" type="reg:customerCategoryType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="companyCustnum" type="reg:customerNumberType" minOccurs="0"/>
+			<xsd:element name="accountType" type="reg:accountCategoryType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="superChooserRoleType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Orange account registration super-chooser role data
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="billingCustomerId" type="reg:billingCustomerIdType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="billingCustomerName" type="reg:billingCustomerNameType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="companyCustnum" type="reg:customerNumberType" maxOccurs="1" minOccurs="0"/>
+			<xsd:element name="companyCustomerType" type="reg:customerCategoryType" maxOccurs="1" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

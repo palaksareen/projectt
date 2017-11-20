@@ -1,0 +1,308 @@
+html, body { height: 100%; }
+
+.online-form-next {
+	display: block;
+}
+
+.hide-error-msg {
+	display: block;
+}
+
+.online-form-previous {
+	margin-right :20px;
+}
+.module19Box .formFieldRow{
+	clear: both;
+}
+.module19Box  div.formFieldRow {
+	margin-bottom: 20px;
+}
+.module19Box  div.posRel {
+	position: relative;
+}
+.margin-bottom-20 {
+	margin-bottom: 20px !important;
+}
+.margin-bottom-10 {
+	margin-bottom: 10px !important;
+}
+.module19Box .iframe-error-head {
+	padding: 20px 20px 0;
+}
+.module19Box .iframe-error-content{
+	border: 1px solid #032b5a; 
+	padding: 20px 20px 0; 
+	background: #efefef;
+}
+.module19Box .iframe-error-color{
+	color: #bf271e;
+}
+.module19Box input[type=text], .module19Box input[type=number], .module19Box select {
+	width: 278px;
+}
+.module19Box .default-content-container input[type=submit], .module19Box .default-content-container input[type=button] {
+	width: 120px;
+	float: left;
+	border-radius: 0.25em !important;
+}
+.module19Box .characterFieldRow label{
+	display: inline;
+}
+.module19Box textarea, .module19Box input[type=number] {
+   -webkit-appearance: none;
+   -moz-box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border: 1px solid #d8d8d8;
+	color: #032b5a;
+	padding: 8px 10px;
+	width: 278px;
+	font-size: .875rem;
+}
+.module19Box  input[type=button].online-form-previous {
+    color: #032b5a;
+    border: 1px solid #c1c1c1;
+    background: #F7F7F7;
+	padding: 8px 10px;
+    background-image: -moz-linear-gradient(top,#F7F7F7 0,#E6E6E6 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#F7F7F7),color-stop(100%,#E6E6E6));
+    background-image: -webkit-linear-gradient(top,#F7F7F7 0,#E6E6E6 100%);
+    background-image: -o-linear-gradient(top,#F7F7F7 0,#E6E6E6 100%);
+    background-image: -ms-linear-gradient(top,#F7F7F7 0,#E6E6E6 100%);
+    background-image: linear-gradient(to bottom,#F7F7F7 0,#E6E6E6 100%);
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;   
+}
+.module19Box  input[type=button].online-form-previous:hover {
+	background-color: #f2f3f4;
+    background-image: -webkit-linear-gradient( top , #f2f3f4, #b1bcc9);
+    background-image: linear-gradient(to bottom, #f2f3f4, #b1bcc9);
+    color: #032b5a;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.module19Box .characterFieldRow input[type=password], .module19Box .securitypass {	
+	-webkit-appearance: none;
+	border: 1px solid #d8d8d8;
+	padding: 8px 10px;
+	color: #032b5a;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	background-color: #FFF;
+}
+.module19Box .characterFieldRow input[type=password]{
+	width:35px;
+	margin-left: 50px;
+	text-align: center;
+}
+.module19Box .securitypass{
+	width:278px;
+}
+.module19Box .noPassword{
+	margin: 10px 0 30px 0;
+}
+.module19Box .cancelButton{
+	margin-top: 18px;
+}
+.module19Box .cancelButton, .module19Box .noPassword{
+	width: auto;
+	cursor: pointer;
+}
+
+.module19Box .cancelButton .cancelIcon, .module19Box .noPassword .chevronButton{
+	border: 0;
+	color: #419eda;
+	padding: 5px 20px 5px 25px;
+	display: block;
+	float: none;
+	width: auto;
+	font-size: .875em;
+	line-height: 1em;
+}
+.module19Box .cancelButton .cancelIcon{
+	background: url(//static.o2.co.uk/shared/img/arrow_blue_small.png) no-repeat scroll 2px 50% transparent;
+}
+.module19Box .noPassword .chevronButton{
+	background: url(//static.o2.co.uk/shared/img/arrow_blue_small.png) no-repeat scroll 2px 50% transparent;
+}
+
+.module19Box .cancelButton .cancelIcon a, .module19Box .noPassword .chevronButton a {
+	padding: 0;
+	font-size: 1em;
+	text-decoration: none;
+}
+
+.dvError {
+	background: #FFC1C0;
+	padding: 12px 12px 8px 12px;
+	color: #bf271e;
+	margin-bottom: 20px;
+}
+
+.errorMsg {
+	color: #bf271e;
+	font-size: 14px;
+	display: none;
+	margin: 10px 0;
+}
+
+.errorMessage {
+	color: #bf271e;
+	font-size: 15px;
+	font-weight: bold;
+	padding-bottom: 5px;
+}
+
+.errorMessage span {
+	left: 5px;
+	position: relative;
+	bottom: 7px;
+}
+
+.dvError ul li {
+	color: #D4214B;
+	font-size: 15px;
+	margin-left: 24px;
+}
+
+.module19Box .onlineForm input{
+	border-radius: 0px !important;
+}
+.module19Box input[type=text], .module19Box input[type=number], .module19Box input[type=password] {
+	border-radius: 0px;
+	border-color: #d8d8d8;
+}
+.module19Box .customSelect {
+	padding-left: 0;
+	width: 318px;
+	float: none;
+}
+.module19Box .poundSign {
+	position: absolute;
+    left: 8px;
+    top: 37px;
+    font-size: 15px;
+}
+.module19Box .billAmount, .module19Box .airtimeBalance {
+	padding-left:20px !important;
+}
+.module19Box .customSelect span.select {
+	display: block;
+	border-radius: 0;
+}
+
+.journeyWrapper{
+	width: 100%;
+	display: inline-block;
+	margin-bottom: 25px;
+	position: relative;
+}
+.journeyWrapper span{
+	float: left;
+}
+.journeyWrapper .lineBG{
+	border: 1px solid #d8d8d8;
+    width: 65px;
+    position: relative;
+    top: 15px;
+    margin: 0 10px;
+}
+.journeyWrapper .stepCounter, .journeyWrapper .stepCopy {
+	display: inline-block;
+}
+.journeyWrapper .stepCounter {
+	width: 100%;
+}
+.journeyWrapper .stepCopy {
+	width: 295px;
+}
+.journeyWrapper .stepCopy {
+	margin-top: 10px;
+}
+.stepCopy .first {
+	width: 65px;
+}
+.stepCopy .second {
+	width: 65px;
+    margin-left: 34px;
+    text-align: center;
+}
+.stepCopy .third {
+	width: 92px;
+    margin-left: 37px;
+    text-align: center;
+}
+.stepCopy .active{
+	font-family: Frutiger65Bold, sans-serif;
+}
+.stepText{
+	padding: 10px 0;
+}
+.module19Box .businessUserData {
+	display: none;
+}
+.ui-widget-content .ui-icon {
+	background-image: url("../img/ui-icons_444444_256x240.png") !important;
+}
+.ui-widget-header .ui-icon {
+	background-image: url("../img/ui-icons_444444_256x240.png") !important;
+}
+
+@media screen and (min-width: 575px) {
+	.module19Box input[type=text], .module19Box input[type=number], .module19Box select, .module19Box textarea {
+		width: 320px;
+	}
+	.module19Box .iframe-error-head {
+		padding: 0 30px;
+	}
+	.module19Box .iframe-error-content{
+		padding: 25px 30px 0 30px; 
+	}
+	.module19Box .online-form-previous{
+		margin-right:50px;
+	}
+	.module19Box .default-content-container input[type=submit], .module19Box .default-content-container input[type=button] {
+		width: 150px;
+	}
+	.journeyWrapper .stepCopy {
+		width: 100%;
+	}
+	.stepCopy .first, .stepCopy .second, .stepCopy .third {
+		width: auto;
+	}
+	.stepCopy .second {
+		margin-left: 60px;
+	}
+	.stepCopy .third {
+		margin-left: 40px;
+	}
+	.journeyWrapper .lineBG{
+		width: 155px;
+	}
+	.journeyWrapper .leftPos{
+		left: 232px !important;
+	}
+	.module19Box .securitypass{
+		width:320px;
+	}
+}
+
+@media screen and (min-width: 815px) {
+
+}

@@ -1,0 +1,85 @@
+group 'onlinehelp'
+
+apply from: '../external-dependencies.gradle'
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+
+project.archivesBaseName = 'onlinehelp'
+
+configurations {
+    jaxb
+}
+
+repositories {
+    mavenCentral()
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.5.RELEASE"
+    }
+}
+
+configurations {
+    providedRuntime
+}
+
+dependencies {
+
+    jaxb jaxbxjc
+    compile jaxws, cache, esapi
+    compile springBoot.web, springBoot.aop, spring.contextSupport, springBoot.velocity
+    compile javassist.assist, commons.io, commons.configuration, aspect
+    compile slf4jLogger.core, slf4jLogger.classic, slf4jApi
+    compile junit, mockito, powerMock.junit4, powerMock.mockito, powerMock.easymock, easymock
+    compile dropwizard.core, dropwizard.annotation, dropwizard.jersey, dropwizard.jvm, dropwizard.graphite
+    compile yammer.core, yammer.annotation, yammer.jersey, yammer.spring, yammer.aop
+    compile ryantenney.spring, codahale.json
+    compile jersey.client
+    providedCompile servlet
+}
+
+
+def genWsdl(wsdlPackage, wsdlFile, binding) {
+    def wsdlFileLocation = projectDir.absolutePath + '/src/main/resources' + wsdlPackage
+    def javaSrc = projectDir.absolutePath + '/src/main/java'
+    def JAVA_HOME = System.env.'JAVA_HOME'
+
+    if (!binding) {
+        def bindingXml = wsdlFileLocation + 'binding.xml'
+        exec {
+            commandLine(JAVA_HOME + '/bin/wsimport', '-b', bindingXml, wsdlFileLocation + wsdlFile,
+                    '-keep', '-Xnocompile', '-s', javaSrc, '-wsdllocation', wsdlFile)
+        }
+    } else {
+        exec {
+            commandLine(JAVA_HOME + '/bin/wsimport', wsdlFileLocation + wsdlFile,
+                    '-keep', '-Xnocompile', '-s', javaSrc, '-wsdllocation', wsdlFile)
+        }
+    }
+
+}
+
+task genSubscriberSvcStub {
+    doLast {
+        genWsdl('/wsdl/subscriberservice_2_0/', 'subscriberservice_2_0.wsdl', true)
+    }
+}
+
+task genUserAcctSvcStub {
+    doLast {
+        genWsdl('/wsdl/useraccountsservice_1_0/', 'useraccountsservice_1_0.wsdl', false)
+    }
+}

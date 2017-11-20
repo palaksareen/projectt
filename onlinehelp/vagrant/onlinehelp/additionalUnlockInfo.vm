@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" class="no-js" lang="en">
+
+<head>
+    #parse("head.vm")
+</head>
+
+<body>
+<div class="module19Box" id="module19Box">
+
+    <div class="grid">
+        <div class="grid-row">
+            <div class="default-content-container">
+                #parse("serverError.vm")
+
+                <h2>Unlocking an O2 mobile to use on a different network</h2>
+
+                <!-- User Journey steps -->
+                <div class="journeyWrapper">
+                    <div class="stepCounter">
+                        <span class="stepIcon"><img src="_asset/img/1-unselected.png"/></span>
+                        <span class="lineBG"></span>
+                        <span class="stepIcon"><img src="_asset/img/2-unselected.png"/></span>
+                        <span class="lineBG"></span>
+                        <span class="stepIcon"><img src="_asset/img/3-selected.png"/></span>
+                    </div>
+                    <div class="stepCopy">
+                        <span class="stepDetail first">Your details</span>
+                        <span class="stepDetail second">Your security details</span>
+                        <span class="stepDetail third active">Additional information</span>
+                    </div>
+                </div>
+                <!-- End - User Journey steps -->
+
+                <h3>Additional information</h3>
+                <div class="text">
+                    <p>Fill in the details in the spaces below. You'll have to fill in any field
+                        marked with a * to continue.</p>
+                </div>
+
+                <form method="POST" name="onlineForm" class="onlineForm" id="onlineForm"
+                      action="submit">
+
+                    <div class="formFieldRow">
+                        <label class="margin-bottom-10">The model of your phone*</label>
+                        <input type="text" name="model" id="model" class="model" maxlength="20"
+                               value="$additionalInfo.model" required/>
+                        <span class="errorMsg">Fill in to continue.</span>
+                    </div>
+                    <div class="formFieldRow">
+                        <label class="margin-bottom-10">Your phone's IMEI number*</label>
+                        <input type="text" name="imei" id="imei" class="imei" maxlength="20"
+                               value="$additionalInfo.imei" required/>
+                        <span class="errorMsg">Fill in to continue.</span>
+                    </div>
+
+                    <p>You can find your IMEI number by entering *#06# on your phone's keypad. It
+                        should be 15 digits long.</p>
+
+						<!-- End - User Journey steps -->
+                    #if( $userDetails.accountType == "biz")
+                        <div class="formFieldRow">
+                            <label class="margin-bottom-10">Type in the mobile number, IMEI number and model of any
+                                other phones you want to unlock.</label>
+                            <textarea name="addInfo" id="addInfo" class="addInfo" maxlength="500"
+                                      rows="10">$additionalInfo.addInfo</textarea>
+                            <span class="errorMsg"></span>
+                        </div>
+                    #end
+					
+                    <input type="hidden" name="pageInfo" id="pageInfo" class="pageInfo"
+                           value="submit"/>
+                    <input type="hidden" name="journey" id="journey" value="$journey"/>
+					<input type="hidden" name="csrfToken" id="csrfToken" value="$csrfToken"/>	   
+                    <div class="formFieldRow">
+                        <input class="online-form-previous margin-bottom-10" type="button"
+                               onclick="javascript: form.action='previous';"
+                               id="step-previous" alt="Previous" value="Previous" title="Previous"/>
+                        <input class="online-form-next margin-bottom-10" type="submit"
+                               id="step-final-submit" alt="Submit" value="Submit" title="Submit"/>
+                    </div>
+                    <div class="formFieldRow">
+                        <div class="ctaConfigurableIcon cancelButton"><span class="cancelIcon">
+                            <a href="cancel">Cancel</a></span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

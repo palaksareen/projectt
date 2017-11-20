@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+		Date 		Change 		Author 		Change-Description
+		28/08/2012   1.0.5		VK			Added newFriendlyUsernameType, foreNameType, lastNameType, securityQuestionType, securityAnswerType, passwordType
+		07/08/2012   1.0.4		Nandhini	Added PinType
+		14/10/2011   1.0.3     	Amit Kumar	addressLine1,townCity,postcode,country elements made optional under Address complex type.
+		18/11/2010   1.0.2     	Rajesh      Removed the simple type "customerCategoryType" without the enumeration values.
+		18/11/2010   1.0.1     	Raghu       Renamed the complex type "addressType" to "portalAddressType"
+		17/07/2009   1.0.0     	Arjun       Initial Version
+	--><xsd:schema targetNamespace="http://soa.o2.co.uk/pscommonregistrationdata_1" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:reg="http://soa.o2.co.uk/pscommonregistrationdata_1" xmlns:xcore="http://soa.o2.co.uk/coredata_1">
+   <xsd:import namespace="http://soa.o2.co.uk/coredata_1" schemaLocation="coredata_1_1.xsd"/>
+   <xsd:simpleType name="CustomerCategoryType">
+      <xsd:annotation>
+         <xsd:documentation>Customer category type</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="CON"/>
+         <xsd:enumeration value="SOL"/>
+         <xsd:enumeration value="PAR"/>
+         <xsd:enumeration value="LTD"/>
+         <xsd:enumeration value="CHA"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="CustomerSegmentationType">
+      <xsd:annotation>
+         <xsd:documentation>Customer segmentation type</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Platinum"/>
+         <xsd:enumeration value="Gold"/>
+         <xsd:enumeration value="Silver"/>
+         <xsd:enumeration value="Bronze"/>
+         <xsd:enumeration value="Select"/>
+         <xsd:enumeration value="none"/>
+         <xsd:enumeration value="Sel_Inv"/>
+         <xsd:enumeration value="Sel_Few"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="ContactMediumType">
+      <xsd:annotation>
+         <xsd:documentation>Contact medium type</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Voice"/>
+         <xsd:enumeration value="Email"/>
+         <xsd:enumeration value="SMS"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="CustomerRoleSummaryType">
+      <xsd:annotation>
+         <xsd:documentation>Role summary Null, COMPLEX or Geneva Account Number</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string"/>
+   </xsd:simpleType>
+   <xsd:simpleType name="GenderType">
+      <xsd:annotation>
+         <xsd:documentation>Gender type</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="M"/>
+         <xsd:enumeration value="F"/>
+         <xsd:enumeration value="U"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="OwningBusinessDivisionType">
+      <xsd:annotation>
+         <xsd:documentation>Owning business division type</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Online"/>
+         <xsd:enumeration value="O2UK"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="RegistrationCategoryType">
+      <xsd:annotation>
+         <xsd:documentation>Registration category type</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="P"/>
+         <xsd:enumeration value="B"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="AccountCategoryType">
+      <xsd:annotation>
+         <xsd:documentation>Account category</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="L2M"/>
+         <xsd:enumeration value="RevenueShare"/>
+         <xsd:enumeration value="Consumer"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="SectorType">
+      <xsd:annotation>
+         <xsd:documentation>Sector type</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Advertising and Design"/>
+         <xsd:enumeration value="Agriculture"/>
+         <xsd:enumeration value="Architect Services"/>
+         <xsd:enumeration value="Construction"/>
+         <xsd:enumeration value="Education"/>
+         <xsd:enumeration value="Engineering"/>
+         <xsd:enumeration value="Financial Services"/>
+         <xsd:enumeration value="Government/Council Services"/>
+         <xsd:enumeration value="Health"/>
+         <xsd:enumeration value="Information Technology"/>
+         <xsd:enumeration value="Legal"/>
+         <xsd:enumeration value="Leisure"/>
+         <xsd:enumeration value="Consultant"/>
+         <xsd:enumeration value="Manufacturing"/>
+         <xsd:enumeration value="Office/General Supplies"/>
+         <xsd:enumeration value="Estate Management"/>
+         <xsd:enumeration value="Utilities"/>
+         <xsd:enumeration value="Other"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="ListingDetailType">
+      <xsd:annotation>
+         <xsd:documentation>Listing detail type</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Full"/>
+         <xsd:enumeration value="Limited"/>
+         <xsd:enumeration value="Ex-Directory"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="ListingLevelType">
+      <xsd:annotation>
+         <xsd:documentation>Listing level type</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Not Opted"/>
+         <xsd:enumeration value="Online/Printed/Voice"/>
+         <xsd:enumeration value="Online/Printed"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="CRUD">
+      <xsd:annotation>
+         <xsd:documentation>Possible Values for Action Element</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Create"/>
+         <xsd:enumeration value="Read"/>
+         <xsd:enumeration value="Update"/>
+         <xsd:enumeration value="Delete"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="PortalMSISDNStatusType">
+      <xsd:annotation>
+         <xsd:documentation>Possible Values for an MSISDN Status</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="Yes"/>
+         <xsd:enumeration value="No"/>
+         <xsd:enumeration value="Info"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:complexType name="AddressType">
+      <xsd:annotation>
+         <xsd:documentation>Complex Type for defining location address</xsd:documentation>
+      </xsd:annotation>
+      <xsd:sequence>
+         <xsd:element name="houseNumber" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="houseName" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="addressLine1" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="addressLine2" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="townCity" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="county" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="postcode" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="country" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="status" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="PTCABS" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="UserRoleType">
+      <xsd:annotation>
+         <xsd:documentation>Geneva User Role Complext Type</xsd:documentation>
+      </xsd:annotation>
+      <xsd:sequence>
+         <xsd:element name="GenevaAccountId" type="xsd:string"/>
+         <xsd:element name="GenevaAccountName" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="GenevaCustomerId" type="xsd:string"/>
+         <xsd:element name="GenevaCustomerName" type="xsd:string"/>
+         <xsd:element name="HorizonCompanyCustnum" type="xsd:integer"/>
+         <xsd:element name="CompanyCustomerType" type="reg:CustomerCategoryType"/>
+         <xsd:element name="MSISDN" type="xcore:msisdnType"/>
+         <xsd:element name="AccountType" type="reg:AccountCategoryType" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ChooserRoleType">
+      <xsd:annotation>
+         <xsd:documentation>Geneva Chooser Role Complex Type</xsd:documentation>
+      </xsd:annotation>
+      <xsd:sequence>
+         <xsd:element name="GenevaAccountId" type="xsd:string"/>
+         <xsd:element name="GenevaAccountName" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="GenevaCustomerId" type="xsd:string"/>
+         <xsd:element name="GenevaCustomerName" type="xsd:string"/>
+         <xsd:element name="CompanyCustomerType" type="reg:CustomerCategoryType"/>
+         <xsd:element name="HorizonCompanyCustnum" type="xsd:integer"/>
+         <xsd:element name="AccountType" type="reg:AccountCategoryType" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="SuperchooserRoleType">
+      <xsd:annotation>
+         <xsd:documentation>Geneva Superuser Role complex type</xsd:documentation>
+      </xsd:annotation>
+      <xsd:sequence>
+         <xsd:element name="GenevaCustomerId" type="xsd:string"/>
+         <xsd:element name="GenevaCustomerName" type="xsd:string"/>
+         <xsd:element name="HorizonCompanyCustnum" type="xsd:integer"/>
+         <xsd:element name="CompanyCustomerType" type="reg:CustomerCategoryType"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="RoleSetType">
+      <xsd:annotation>
+         <xsd:documentation>Role Set Type conprising of all the roles</xsd:documentation>
+      </xsd:annotation>
+      <xsd:sequence>
+         <xsd:element name="userRole" type="reg:UserRoleType" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="chooserRole" type="reg:ChooserRoleType" minOccurs="0" maxOccurs="unbounded"/>
+         <xsd:element name="superchooserRole" type="reg:SuperchooserRoleType" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="UserType">
+      <xsd:annotation>
+         <xsd:documentation>Complex Type to define the online user</xsd:documentation>
+      </xsd:annotation>
+      <xsd:sequence>
+         <xsd:element name="Address" type="reg:AddressType" minOccurs="0"/>
+         <xsd:element name="roleSet" type="reg:RoleSetType" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="custnum" type="xsd:integer" use="required"/>
+      <xsd:attribute name="id" type="xsd:string" use="required"/>
+      <xsd:attribute name="domain" type="xsd:string" use="required"/>
+      <xsd:attribute name="SecurityQuestion" type="xsd:string" use="optional"/>
+      <xsd:attribute name="SecurityAnswer" type="xsd:string" use="optional"/>
+      <xsd:attribute name="key" type="xsd:string" use="optional"/>
+      <xsd:attribute name="password" type="xsd:string" use="optional"/>
+      <xsd:attribute name="level2Password" type="xsd:string" use="optional"/>
+      <xsd:attribute name="gender" type="reg:GenderType" use="optional"/>
+      <xsd:attribute name="forename" type="xsd:string" use="optional"/>
+      <xsd:attribute name="lastname" type="xsd:string" use="optional"/>
+      <xsd:attribute name="initials" type="xsd:string" use="optional"/>
+      <xsd:attribute name="title" type="xsd:string" use="optional"/>
+      <xsd:attribute name="alternativeEmail" type="xsd:string" use="optional"/>
+      <xsd:attribute name="alternativeContactNumber" type="xsd:string" use="optional"/>
+      <xsd:attribute name="dateOfBirth" type="xsd:date" use="optional"/>
+      <xsd:attribute name="partner" type="xsd:string" use="optional"/>
+      <xsd:attribute name="MSISDN" type="xcore:msisdnType" use="optional"/>
+      <xsd:attribute name="MSISDNvalid" type="reg:PortalMSISDNStatusType" use="optional"/>
+      <xsd:attribute name="phoneMake" type="xsd:string" use="optional"/>
+      <xsd:attribute name="network" type="xsd:string" use="optional"/>
+      <xsd:attribute name="wantsGenieMarketting" type="xsd:boolean" use="optional"/>
+      <xsd:attribute name="wantsOtherMarketting" type="xsd:boolean" use="optional"/>
+      <xsd:attribute name="roleSummary" type="reg:CustomerRoleSummaryType" use="optional"/>
+      <xsd:attribute name="segmentation" type="reg:CustomerSegmentationType" use="optional"/>
+      <xsd:attribute name="customerType" type="reg:CustomerCategoryType" use="optional"/>
+      <xsd:attribute name="contactMedium" type="reg:ContactMediumType" use="optional"/>
+      <xsd:attribute name="posBusinessUnit" type="xsd:string" use="optional"/>
+      <xsd:attribute name="saleDate" type="xsd:date" use="optional"/>
+      <xsd:attribute name="riskThreshold" type="xsd:integer" use="optional"/>
+      <xsd:attribute name="riskThresholdDate" type="xsd:date" use="optional"/>
+      <xsd:attribute name="creditVetPassed" type="xsd:string" use="optional"/>
+      <xsd:attribute name="creditVetDate" type="xsd:date" use="optional"/>
+      <xsd:attribute name="referral" type="xsd:string" use="optional"/>
+      <xsd:attribute name="referralDate" type="xsd:date" use="optional"/>
+      <xsd:attribute name="companyName" type="xsd:string" use="optional"/>
+      <xsd:attribute name="companyTelephoneNumber" type="xsd:string" use="optional"/>
+      <xsd:attribute name="numberOfEmployees" type="xsd:integer" use="optional"/>
+      <xsd:attribute name="jobTitle" type="xsd:string" use="optional"/>
+      <xsd:attribute name="jobFunction" type="xsd:string" use="optional"/>
+      <xsd:attribute name="hasHadRole" type="xsd:boolean" use="optional"/>
+      <xsd:attribute name="hasBeenBillingContact" type="xsd:boolean" use="optional"/>
+      <xsd:attribute name="owningBusinessDivision" type="reg:OwningBusinessDivisionType" use="optional"/>
+      <xsd:attribute name="registrationType" type="reg:RegistrationCategoryType" use="optional"/>
+      <xsd:attribute name="sector" type="reg:SectorType" use="optional"/>
+      <xsd:attribute name="companyRegistrationNumber" type="xsd:string" use="optional"/>
+      <xsd:attribute name="isESMECustomer" type="xsd:boolean" use="optional"/>
+      <xsd:attribute name="GenevaCustomerId" type="xsd:string" use="optional"/>
+      <xsd:attribute name="accountManagerName" type="xsd:string" use="optional"/>
+      <xsd:attribute name="accountManagerEmail" type="xsd:string" use="optional"/>
+      <xsd:attribute name="timeStamp" type="xsd:dateTime" use="optional"/>
+      <xsd:attribute name="dqlistingdetail" type="reg:ListingDetailType" use="optional"/>
+      <xsd:attribute name="dqlistinglevel" type="reg:ListingLevelType" use="optional"/>
+   </xsd:complexType>
+   <xsd:complexType name="UserDetailsType">
+      <xsd:annotation>
+         <xsd:documentation>USer details inclusing User data and CRUD action</xsd:documentation>
+      </xsd:annotation>
+      <xsd:sequence>
+         <xsd:element name="user" type="reg:UserType" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="action" type="reg:CRUD" use="optional"/>
+   </xsd:complexType>
+   <xsd:complexType name="users">
+      <xsd:annotation>
+         <xsd:documentation>Complex type to define array of UserDetailsType</xsd:documentation>
+      </xsd:annotation>
+      <xsd:sequence>
+         <xsd:element name="userDetails" type="reg:UserDetailsType" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:simpleType name="charType">
+      <xsd:annotation>
+         <xsd:documentation>Type used for character information</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:minLength value="1"/>
+         <xsd:maxLength value="1"/>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:complexType name="portalAddressType">
+      <xsd:annotation>
+         <xsd:documentation>Complex Type for defining location address</xsd:documentation>
+      </xsd:annotation>
+      <xsd:sequence>
+         <xsd:element name="houseNumber" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="houseName" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="addressLine1" type="xsd:string"/>
+         <xsd:element name="addressLine2" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="townCity" type="xsd:string"/>
+         <xsd:element name="county" type="xsd:string" minOccurs="0"/>
+         <xsd:element name="postcode" type="xsd:string"/>
+         <xsd:element name="country" type="xsd:string"/>
+         <xsd:element name="status" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   
+   	<xsd:simpleType name="PINType">
+    <xsd:annotation>
+      <xsd:documentation>Password, plaintext, with basic complexity enforcement</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="4"/><!-- TODO: confirm this restriction -->
+      <xsd:maxLength value="20"/><!-- Info: length restriction taken from Orange DB sechema. -->
+      <xsd:pattern value="[0-9]*"/><!-- TODO: confirm this restriction -->
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  	  <xsd:simpleType name="newFriendlyUsernameType">
+	    <xsd:annotation>
+	      <xsd:documentation>the newFriendlyUsername Type</xsd:documentation>
+	    </xsd:annotation>
+	    <xsd:restriction base="xsd:string">
+	      <xsd:pattern value="([\.a-zA-Z0-9_\-])+@([a-zA-Z0-9_\-])+(([a-zA-Z0-9_\-])*\.([a-zA-Z0-9_\-])+)+"/>
+	    </xsd:restriction>
+	  </xsd:simpleType>
+	  
+	    <xsd:simpleType name="foreNameType">
+	    <xsd:annotation>
+	      <xsd:documentation>the fore Name Type</xsd:documentation>
+	    </xsd:annotation>
+	    <xsd:restriction base="xsd:string">
+	      <xsd:maxLength value="20"/>	  	    
+	      <xsd:pattern value="[a-zA-Z0-9,\-' ][a-zA-Z0-9\.,\-' ]{1,19}"/>
+	    </xsd:restriction>
+	  </xsd:simpleType>
+	  
+	    <xsd:simpleType name="lastNameType">
+	    <xsd:annotation>
+	      <xsd:documentation>Last name type</xsd:documentation>
+	    </xsd:annotation>
+	    <xsd:restriction base="xsd:string">
+	      <xsd:maxLength value="20"/>	    
+	      <xsd:pattern value="[a-zA-Z0-9,\-' ][a-zA-Z0-9\.,\-' ]{1,19}"/>
+	    </xsd:restriction>
+	  </xsd:simpleType>
+
+	  <xsd:simpleType name="securityQuestionType">
+	    <xsd:annotation>
+	      <xsd:documentation>Security questions type</xsd:documentation>
+	    </xsd:annotation>
+	    <xsd:restriction base="xsd:string">
+	      <xsd:maxLength value="50"/>	
+	      <xsd:pattern value="[^\-#]*[A-Za-z0-9' ,]*"/>
+	    </xsd:restriction>
+	  </xsd:simpleType>
+
+	<xsd:simpleType name="securityAnswerType">
+	  <xsd:annotation>
+	    <xsd:documentation>Security answer type.</xsd:documentation>
+	  </xsd:annotation>
+	    <xsd:restriction base="xsd:string">
+	      <xsd:maxLength value="50"/>	    
+	      <xsd:pattern value="[a-zA-Z0-9 \.,\-]{1,50}"/>
+	   </xsd:restriction>
+	 </xsd:simpleType>
+	  	
+	<xsd:simpleType name="passwordType">
+    <xsd:annotation>
+      <xsd:documentation>Password with basic complexity enforcement</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="50"/>
+      <xsd:pattern value="[0-9a-zA-Z_!\.\?\+\-\*&lt;&gt;]{6,16}"/>
+    </xsd:restriction>
+	</xsd:simpleType>
+	
+</xsd:schema>

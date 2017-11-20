@@ -1,0 +1,53 @@
+<script type="text/javascript">
+    document.domain = "o2.co.uk";
+</script>
+
+<title>O2 | Help &amp; Support</title>
+<link rel="stylesheet" href="//static.o2.co.uk/shared/css/fonts.css" type="text/css"/>
+<link rel="stylesheet" href="_asset/css/forms.css" type="text/css"/>
+<!--[if gt IE 8]><!-->
+<link rel="stylesheet" href="//static.o2.co.uk/shared/css/custom-classes.css?ts=230220171600"
+      type="text/css"/>
+<link rel="stylesheet" href="//static.o2.co.uk/shared/css/global.css?ts=230220171600"
+      type="text/css"/>
+<link rel="stylesheet" href="//static.o2.co.uk/shared/css/_all-modules.css?ts=230220171600"
+      type="text/css"/>
+<!--<![endif]-->
+<!--[if lt IE 9]>
+<link rel="stylesheet" href="//static.o2.co.uk/shared/css/ie-custom-classes.css?ts=230220171600" type="text/css" />
+<link rel="stylesheet" href="//static.o2.co.uk/shared/css/ie-global.css?ts=230220171600" type="text/css" />
+<link rel="stylesheet" href="//static.o2.co.uk/shared/css/_all-modules-ie.css?ts=230220171600" type="text/css" />
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<link rel="stylesheet" href="//static.o2.co.uk/www/css/background.css?ts=20170306115020"
+      type="text/css"/>
+<!--<![endif]-->
+<!--[if lt IE 9]>
+<link rel="stylesheet" href="//static.o2.co.uk/www/css/ie-background.css?ts=20170306115020" type="text/css" />
+<![endif]-->
+
+<script src="_asset/js/jquery.min.js"></script>
+<script src="_asset/js/forms.js"></script>
+<script src="_asset/js/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="_asset/css/jquery-ui.css">
+
+<script>
+    $(function () {
+        $("#datepicker").datepicker({
+            minDate: new Date("January 1, 1990"),
+            maxDate: "+0",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1990:+0"
+        });
+    });
+    window.onload = function () {
+        if (window.location.pathname.endsWith("previous")) {
+            history.replaceState(null, null, window.location.pathname + "?reload=true")
+        } else if (window.location.pathname.endsWith("submit")) {
+            history.replaceState(null, null, "$journey")
+        }
+
+    };
+</script>
