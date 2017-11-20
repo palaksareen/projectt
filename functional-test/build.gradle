@@ -1,0 +1,46 @@
+group 'functional-test'
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'application'
+
+apply from: 'external-dependencies.gradle'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile junit, cucumber.junit, cucumber.java, cucumber.core, selenium
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+tasks.withType(JavaExec) {
+    systemProperties System.properties
+
+    def isWindows = org.gradle.internal.os.OperatingSystem.current().windows
+    def driverPath
+
+    if (isWindows) {
+        driverPath = "$projectDir.absolutePath/src/main/resources/drivers/windows/chromedriver.exe"
+    } else {
+        driverPath = "$projectDir.absolutePath/src/main/resources/drivers/linux/chromedriver"
+    }
+    systemProperties['webdriver.chrome.driver'] = driverPath
+
+}
+
+task runFT(type: JavaExec, dependsOn: 'compileJava') {
+
+    main = "cucumber.api.cli.Main"
+    classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+    args = ['-p', 'html:cucumber-html-reports', '--glue', 'classpath:uk.co.o2.onlinehelp' +
+            '.stepdef', 'src/main/resources/feature']
+}

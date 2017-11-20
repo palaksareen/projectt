@@ -1,0 +1,18 @@
+def junitVersion = "4.12"
+def cucumberVersion = '1.2.5'
+
+ext {
+
+    junit = "junit:junit:$junitVersion"
+
+    cucumber = [
+            java : "info.cukes:cucumber-java:$cucumberVersion",
+            junit: "info.cukes:cucumber-junit:$cucumberVersion",
+            core : "info.cukes:cucumber-core:$cucumberVersion"
+    ]
+	
+    selenium = 'org.seleniumhq.selenium:selenium-java:3.4.0'
+
+}
+
+
